@@ -123,6 +123,9 @@ pub struct Config {
     /// and turn completions when not focused.
     pub tui_notifications: Notifications,
 
+    /// Disable background update checks that populate the in-app upgrade banner.
+    pub tui_disable_update_check: bool,
+
     /// The directory that should be treated as the current working directory
     /// for the session. All relative paths inside the business-logic layer are
     /// resolved against this path.
@@ -1068,6 +1071,11 @@ impl Config {
                 .as_ref()
                 .map(|t| t.notifications.clone())
                 .unwrap_or_default(),
+            tui_disable_update_check: cfg
+                .tui
+                .as_ref()
+                .map(|t| t.disable_update_check)
+                .unwrap_or(false),
         };
         Ok(config)
     }
@@ -1809,6 +1817,7 @@ model_verbosity = "high"
                 active_profile: Some("o3".to_string()),
                 disable_paste_burst: false,
                 tui_notifications: Default::default(),
+                tui_disable_update_check: false,
             },
             o3_profile_config
         );
@@ -1868,6 +1877,7 @@ model_verbosity = "high"
             active_profile: Some("gpt3".to_string()),
             disable_paste_burst: false,
             tui_notifications: Default::default(),
+            tui_disable_update_check: false,
         };
 
         assert_eq!(expected_gpt3_profile_config, gpt3_profile_config);
@@ -1942,6 +1952,7 @@ model_verbosity = "high"
             active_profile: Some("zdr".to_string()),
             disable_paste_burst: false,
             tui_notifications: Default::default(),
+            tui_disable_update_check: false,
         };
 
         assert_eq!(expected_zdr_profile_config, zdr_profile_config);
@@ -2002,6 +2013,7 @@ model_verbosity = "high"
             active_profile: Some("gpt5".to_string()),
             disable_paste_burst: false,
             tui_notifications: Default::default(),
+            tui_disable_update_check: false,
         };
 
         assert_eq!(expected_gpt5_profile_config, gpt5_profile_config);
@@ -2114,6 +2126,8 @@ mod notifications_tests {
     #[derive(Deserialize, Debug, PartialEq)]
     struct TuiTomlTest {
         notifications: Notifications,
+        #[serde(default)]
+        disable_update_check: bool,
     }
 
     #[derive(Deserialize, Debug, PartialEq)]
