@@ -14,6 +14,10 @@ use codex_core::default_client::create_client;
 use crate::version::CODEX_CLI_VERSION;
 
 pub fn get_upgrade_version(config: &Config) -> Option<String> {
+    if config.tui_disable_update_check {
+        return None;
+    }
+
     let version_file = version_filepath(config);
     let info = read_version_info(&version_file).ok();
 

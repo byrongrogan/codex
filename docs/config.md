@@ -594,6 +594,10 @@ notifications = true
 # You can optionally filter to specific notification types.
 # Available types are "agent-turn-complete" and "approval-requested".
 notifications = [ "agent-turn-complete", "approval-requested" ]
+
+# Suppress version checks and the corresponding upgrade banner.
+# Defaults to false.
+disable_update_check = true
 ```
 
 > [!NOTE]
@@ -642,6 +646,7 @@ notifications = [ "agent-turn-complete", "approval-requested" ]
 | `file_opener` | `vscode` \| `vscode-insiders` \| `windsurf` \| `cursor` \| `none` | URI scheme for clickable citations (default: `vscode`). |
 | `tui` | table | TUI‑specific options. |
 | `tui.notifications` | boolean \| array<string> | Enable desktop notifications in the tui (default: false). |
+| `tui.disable_update_check` | boolean | Skip Codex CLI update checks and hide the in-TUI banner (default: false). |
 | `hide_agent_reasoning` | boolean | Hide model reasoning events. |
 | `show_raw_agent_reasoning` | boolean | Show raw reasoning (when available). |
 | `model_reasoning_effort` | `minimal` \| `low` \| `medium` \| `high` | Responses API reasoning effort. |

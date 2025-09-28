@@ -239,6 +239,11 @@ pub struct Tui {
     /// Defaults to `false`.
     #[serde(default)]
     pub notifications: Notifications,
+
+    /// Disable background version checks that power the in-TUI upgrade banner.
+    /// Defaults to `false`.
+    #[serde(default)]
+    pub disable_update_check: bool,
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Default)]
